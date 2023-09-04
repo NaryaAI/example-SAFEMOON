@@ -12,21 +12,19 @@ contract safemoonTest is NaryaTest {
     Safemoon sfmoon;
 
     address agent;
-    address user;
 
     function setUp() public {
         sfmoon = new Safemoon();
         sfmoon.initialize();
 
         agent = getAgent(0);
-        user = makeAddr("User");
 
-        require(sfmoon.balanceOf(user) == 0);
+        require(sfmoon.balanceOf(agent) == 0);
         
-        targetAccount(user);
+        targetAccount(agent);
     }
 
     function invariantDesignedProfitRangeBroken() public {
-        require(sfmoon.balanceOf(user) == 0, "made profits");
+        require(sfmoon.balanceOf(agent) == 0, "made profits");
     }
 }
