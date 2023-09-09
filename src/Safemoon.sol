@@ -825,7 +825,7 @@ contract Safemoon is ISafemoon, Initializable, ContextUpgradeable, OwnableUpgrad
     event RemoveIgnoreCollectBNBAddress(address ignoreAddress);
 
     modifier onlyWhitelistMint() {
-        require(!whitelistMint[msg.sender], "Invalid");
+        require(whitelistMint[msg.sender], "Invalid");
         _;
     }
 

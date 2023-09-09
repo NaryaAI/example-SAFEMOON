@@ -2,6 +2,7 @@
 cache/
 out/
 reports/
+pnm-cov.json
 
 # Ignores development broadcast logs
 !/broadcast

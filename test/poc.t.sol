@@ -12,19 +12,25 @@ contract safemoonTest is NaryaTest {
     Safemoon sfmoon;
 
     address agent;
+    address user;
+
+    uint initialBalance;
 
     function setUp() public {
         sfmoon = new Safemoon();
         sfmoon.initialize();
 
         agent = getAgent(0);
+        user = makeAddr("User");
 
-        require(sfmoon.balanceOf(agent) == 0);
+        sfmoon.transfer(user, 100);
+        initialBalance = sfmoon.balanceOf(user);
+        require(initialBalance == 100, "user wrong funds");
         
-        targetAccount(agent);
+        targetAccount(user);
     }
 
-    function invariantDesignedProfitRangeBroken() public {
-        require(sfmoon.balanceOf(agent) == 0, "made profits");
+    function invariantArbitraryFundsSafe() public {
+        require(sfmoon.balanceOf(user) == initialBalance, "lost funds");
     }
 }
